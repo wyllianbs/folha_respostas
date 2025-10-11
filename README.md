@@ -1,6 +1,6 @@
-# Folha de Respostas - LaTeX Template
+# Folha de Respostas - $\LaTeX$ Template
 
-Template LaTeX para geração de folhas de respostas de múltipla escolha com leitura óptica, desenvolvido para a Universidade Federal de Santa Catarina (UFSC).
+Template $\LaTeX$ para geração de folhas de respostas de múltipla escolha com leitura óptica, desenvolvido para a Universidade Federal de Santa Catarina (UFSC).
 
 ## 📋 Descrição
 
@@ -18,7 +18,7 @@ Este template permite a criação de folhas de respostas padronizadas para prova
 
 ## 📦 Requisitos
 
-### Pacotes LaTeX necessários:
+### Pacotes $\LaTeX$ necessários:
 - `inputenc` (UTF-8)
 - `fontenc` (T1)
 - `geometry`
@@ -77,7 +77,7 @@ Compile o documento usando:
 pdflatex folha_respostas.tex
 ```
 
-Ou use seu editor LaTeX preferido (recomendado: Kile para Linux).
+Ou use seu editor $\LaTeX$ preferido (recomendado: Kile para Linux).
 
 ## 🎨 Personalização
 
