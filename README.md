@@ -1,6 +1,6 @@
 # Folha de Respostas - $\LaTeX$ Template
 
-Template $\LaTeX$ para geração de folhas de respostas de múltipla escolha com leitura óptica de marca (OMR).
+Template $\LaTeX$ para geração de folhas de respostas de múltipla escolha para leitura óptica de marca (OMR).
 
 ## 📋 Descrição
 
