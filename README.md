@@ -4,7 +4,7 @@ Template $\LaTeX$ para geração de folhas de respostas de múltipla escolha par
 
 ## 📋 Descrição
 
-Este template permite a criação de folhas de respostas padronizadas para provas e avaliações, com suporte a diferentes quantidades de questões e marcadores de alinhamento para leitura óptica automatizada.
+Este template permite a criação de folhas de respostas padronizadas para provas, com suporte a diferentes quantidades de questões e marcadores de alinhamento para leitura óptica automatizada.
 
 ## ✨ Características
 
