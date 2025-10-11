@@ -1,0 +1,678 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% UNIVERSIDADE FEDERAL DE SANTA CATARINA - UFSC
+% Departamento de Informatica e Estatística - INE
+
+% Prof.: Wyllian B. da Silva
+%
+% Folha de Respostas
+% Variável: 
+% - \numquestions: define 10, 20, 25, 30, 40, 50 e 60 questões
+% - \professor: nome do professor
+% - \uf: UF
+% - \centro: centro de ensino
+% - \departamento: departamento
+% - \assunto: título da folha de respostas
+% 
+%
+% Recomendações:
+% Editor Kile (Linux)
+% Codificação de caracteres: UTF-8
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,9pt]{article}
+
+
+% ============================================
+% PACOTES
+% ============================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry} 
+\usepackage{tikz}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[most]{tcolorbox}
+\usepackage{multicol}
+\usepackage{stix}
+\usepackage{fontawesome5}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage{ifthen}
+\usepackage{mdframed}
+\usepackage[table]{xcolor} 
+\usepackage{xparse}
+\usepackage{lmodern,amsmath,amsfonts,amssymb}
+\usepackage[scaled]{helvet}
+
+
+
+% ============================================
+% CONFIGURAÇÕES E DEFINIÇÕES
+% ============================================
+
+\newcommand{\uf}                    {Universidade Federal de Santa Catarina} % UF
+\newcommand{\centro}                {Centro Tecnológico (CTC)} % centro de ensino
+\newcommand{\departamento}          {Departamento de Informática e Estatística (INE)} % departamento
+\newcommand{\professor}             {Wyllian Bezerra da Silva} % nome do professor
+\newcommand{\assunto}               {FOLHA DE RESPOSTAS}
+
+\newcommand{\numquestions}          {60} % número de questões: 10, 20, 25, 30, 40, 50, 60
+
+\newcommand{\studentnumberrowspace} {0pt}
+\newcommand{\questionsrowspace}     {0pt}
+\newcommand{\bubblefontcolor}       {gray!70}
+\newcommand{\bubblewidth}           {0.8pt}
+\newcommand{\bubblefontsize}        {7pt}
+\newcommand{\circlesize}            {5pt}
+\newcommand{\markerfontsize}        {8pt}
+\renewcommand{\arraystretch}        {1.7} 
+\newcommand{\bubblefillcolor}       {blue} 
+\newcommand{\logoUFSCv}             {figs/brasao_UFSC_vertical_sigla.pdf}
+\newcommand{\rcgray}                {\rowcolor{gray!10}}
+
+
+% Array de alternativas
+\def\alternativeA{A}
+\def\alternativeB{B}
+\def\alternativeC{C}
+\def\alternativeD{D}
+\def\alternativeE{E}
+\def\alternativeV{V}
+\def\alternativeF{F}
+
+
+\newcolumntype{L}{>{\raggedleft\arraybackslash}X}
+\newcolumntype{R}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{J}{>{\justifying\arraybackslash}X}
+
+
+\renewcommand{\familydefault}{\sfdefault}
+
+
+\usetikzlibrary{calc}
+
+\geometry{
+  hmargin={.75cm,0.75cm},
+  vmargin={.75cm,.75cm},
+  footskip=2mm,
+}
+
+
+\setlength{\parindent}{0pt}
+
+\tcbset{
+  myboxstyle/.style={
+    colframe=black,   % cor da borda
+    colback=white,    % cor do fundo
+    boxrule=1pt,    % espessura da borda
+    arc=2pt,          % arredondamento dos cantos
+    left=0pt, right=0pt, top=3pt, bottom=0pt, % padding interno
+    enhanced,
+  }
+}
+
+
+\newcommand{\markerbox}{%
+  \begin{tikzpicture}
+    \fill[black] (0,0) rectangle (0.35,0.35);
+  \end{tikzpicture}%
+}
+
+% Marcador
+\NewDocumentCommand{\markerboxcorner}{O{5pt} m O{0.5pt} O{0.15} O{1}}{%
+  \tikz[remember picture, overlay]{
+    % Deslocamento horizontal
+    \pgfmathsetlengthmacro{\dx}{#1}
+    % Metade do comprimento da cruz
+    \pgfmathsetlengthmacro{\halfsize}{#2/2}
+    % Tamanho da caixa preta (meio lado)
+    \pgfmathsetlengthmacro{\boxhalf}{#4}
+
+    % Escopo deslocado horizontalmente
+    \begin{scope}[xshift=\dx]
+      % Desenha o quadrado conforme o formato
+      \ifcase#5
+        % zero não usado, para alinhar os casos (começa em 0)
+      \or % case 1: quadrado preenchido (default)
+        \fill[black] (-\boxhalf,-\boxhalf) rectangle (\boxhalf,\boxhalf);
+      \or % case 2: quadrado vazado (contorno)
+        \draw[line width=#3] (-\boxhalf,-\boxhalf) rectangle (\boxhalf,\boxhalf);
+      \or % case 3: quadrado com círculo (contorno) no centro
+        \draw[line width=#3] (-\boxhalf,-\boxhalf) rectangle (\boxhalf,\boxhalf);
+        \draw[line width=#3] (0,0) circle [radius=0.6*\boxhalf];
+      \or % case 4: quadrado com dot (círculo preenchido) no centro
+        \draw[line width=#3] (-\boxhalf,-\boxhalf) rectangle (\boxhalf,\boxhalf);
+        \fill (0,0) circle [radius=0.4*\boxhalf];
+      \or % case 5: quadrado com círculo (contorno) e dot preenchido no centro
+        \draw[line width=#3] (-\boxhalf,-\boxhalf) rectangle (\boxhalf,\boxhalf);
+        \draw[line width=#3] (0,0) circle [radius=0.76*\boxhalf];
+        \fill (0,0) circle [radius=0.35*\boxhalf];
+      \fi
+
+      % Cruz centrada na caixa (sempre desenhada)
+      \draw[line width=#3]
+        (0, -\halfsize) -- (0, \halfsize);   % vertical
+      \draw[line width=#3]
+        (-\halfsize, 0) -- (\halfsize, 0);   % horizontal
+    \end{scope}
+  }
+}
+
+
+\newtcolorbox{boxcorners}[1][]{%
+  enhanced,
+  boxsep=0pt,
+  opacityback=0,
+  frame hidden,
+%   nobeforeafter,
+%   boxrule=0pt,
+%   left=0pt, right=0pt,  % sem margens laterais internas
+%   top=0pt, bottom=0pt,  % sem margens verticais internas
+  #1,
+  overlay unbroken and first ={%
+    % canto superior esquerdo
+    \node[anchor=south east, inner sep=0pt] 
+      at ([shift={(3pt,-3pt)}]frame.north west) {\fontsize{\markerfontsize}{\markerfontsize}\faSquareFull};
+    % canto superior direito
+    \node[anchor=south west, inner sep=2pt] 
+      at ([shift={(-3pt,-3pt)}]frame.north east) {\fontsize{\markerfontsize}{\markerfontsize}\faSquareFull};
+    % canto inferior esquerdo
+    \node[anchor=north east, inner sep=2pt] 
+      at ([shift={(3pt,3pt)}]frame.south west) {\fontsize{\markerfontsize}{\markerfontsize}\faSquareFull};
+    % canto inferior direito
+    \node[anchor=north west, inner sep=2pt] 
+      at ([shift={(-3pt,3pt)}]frame.south east) {\fontsize{\markerfontsize}{\markerfontsize}\faSquareFull};
+  }
+}
+
+
+\newcommand{\bubblecircle}[1]{%
+  \begin{tikzpicture}[baseline=-.67ex]
+    \ifthenelse{\equal{#1}{x} \OR \equal{#1}{X}}{%
+%       \fill[fill=\bubblefillcolor] (0,0) circle (\circlesize);
+      \filldraw[fill=\bubblefillcolor, draw=black, line width=\bubblewidth] (0,0) circle (\circlesize);
+    }{%
+      \draw[line width=\bubblewidth] (0,0) circle (\circlesize);
+      \node at (0,0) {\fontsize{\bubblefontsize}{\bubblefontsize}\selectfont\textcolor{\bubblefontcolor}{#1}};
+    }%
+  \end{tikzpicture}%
+}
+
+
+\newcommand{\alternativeline}[2]{%
+  \textbf{#1} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} & \bubblecircle{#2} \\[\questionsrowspace]
+}
+
+\newcommand{\alternativelinenum}[1]{%
+  \textbf{#1}  & \bubblecircle{A}& \bubblecircle{B}& \bubblecircle{C}& \bubblecircle{D}& \bubblecircle{E}& \bubblecircle{V}& \bubblecircle{F} \\[\questionsrowspace]
+}
+
+\newcommand{\alternativelinenull}{%
+ \\[\questionsrowspace]
+}
+
+\newcommand{\hdashrulefill}{%
+  \leavevmode
+  \leaders\hbox to 4pt{\hss\textcolor{gray}{-}\hss}\hfill\kern0pt%
+}
+
+
+\newcommand{\headerP}{
+  \begin{mdframed}[
+    innerleftmargin=4pt,
+    innerrightmargin=4pt,
+    innertopmargin=5pt,
+    innerbottommargin=5pt,
+  ]
+
+\begin{minipage}[c]{.1\textwidth}
+  \includegraphics[width=\textwidth]{\logoUFSCv} 
+  \end{minipage}
+  \hspace{5pt}
+  \begin{minipage}[c]{.755\textwidth}\setstretch{1.175}
+  \vspace{2pt}
+  \LARGE{\bf{\uf}}\\
+  \Large{\centro} \\
+  \Large{\departamento}\\
+  \large{\assunto} \\
+  \textnormal{Professor \professor} 
+\end{minipage}
+  \begin{minipage}[c]{.1\textwidth}
+    \fcolorbox{black}{blue!5}{
+          \begin{minipage}{\textwidth}
+            \hfill\vspace{1.5cm}
+          \end{minipage}
+        }
+  \end{minipage}\newline
+  \newline\newline
+  \noindent Discente:\enspace\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill\hspace{1pt} Turma:\enspace\hrulefill
+  \end{mdframed}
+}
+
+
+% Tabela: Matrícula
+\newcommand{\matricula}{
+\begin{tabularx}{\textwidth}{rCCCCCCCC}
+\multicolumn{9}{c}{\textbf{Matrícula}}  \\[\studentnumberrowspace]
+ & \multicolumn{1}{C}{\fbox{\phantom{0}}} & \multicolumn{1}{C}{\fbox{\phantom{0}}} & \multicolumn{1}{C}{\fbox{\phantom{0}}} & \multicolumn{1}{C}{\fbox{\phantom{0}}} & \multicolumn{1}{C}{\fbox{\phantom{0}}} & \multicolumn{1}{C}{\fbox{\phantom{0}}} & \multicolumn{1}{C}{\fbox{\phantom{0}}} & \multicolumn{1}{C}{\fbox{\phantom{0}}} \\[\studentnumberrowspace]
+\textbf{0} & \bubblecircle{0} & \bubblecircle{0} & \bubblecircle{0} & \bubblecircle{0} & \bubblecircle{0} & \bubblecircle{0} & \bubblecircle{0} & \bubblecircle{0} \\[\studentnumberrowspace]
+\rcgray\textbf{1} & \bubblecircle{1} & \bubblecircle{1} & \bubblecircle{1} & \bubblecircle{1} & \bubblecircle{1} & \bubblecircle{1} & \bubblecircle{1} & \bubblecircle{1} \\[\studentnumberrowspace]
+\textbf{2} & \bubblecircle{2} & \bubblecircle{2} & \bubblecircle{2} & \bubblecircle{2} & \bubblecircle{2} & \bubblecircle{2} & \bubblecircle{2} & \bubblecircle{2} \\[\studentnumberrowspace]
+\rcgray\textbf{3} & \bubblecircle{3} & \bubblecircle{3} & \bubblecircle{3} & \bubblecircle{3} & \bubblecircle{3} & \bubblecircle{3} & \bubblecircle{3} & \bubblecircle{3} \\[\studentnumberrowspace]
+\textbf{4} & \bubblecircle{4} & \bubblecircle{4} & \bubblecircle{4} & \bubblecircle{4} & \bubblecircle{4} & \bubblecircle{4} & \bubblecircle{4} & \bubblecircle{4} \\[\studentnumberrowspace]
+\rcgray\textbf{5} & \bubblecircle{5} & \bubblecircle{5} & \bubblecircle{5} & \bubblecircle{5} & \bubblecircle{5} & \bubblecircle{5} & \bubblecircle{5} & \bubblecircle{5} \\[\studentnumberrowspace]
+\textbf{6} & \bubblecircle{6} & \bubblecircle{6} & \bubblecircle{6} & \bubblecircle{6} & \bubblecircle{6} & \bubblecircle{6} & \bubblecircle{6} & \bubblecircle{6} \\[\studentnumberrowspace]
+\rcgray\textbf{7} & \bubblecircle{7} & \bubblecircle{7} & \bubblecircle{7} & \bubblecircle{7} & \bubblecircle{7} & \bubblecircle{7} & \bubblecircle{7} & \bubblecircle{7} \\[\studentnumberrowspace]
+\textbf{8} & \bubblecircle{8} & \bubblecircle{8} & \bubblecircle{8} & \bubblecircle{8} & \bubblecircle{8} & \bubblecircle{8} & \bubblecircle{8} & \bubblecircle{8} \\[\studentnumberrowspace]
+\rcgray\textbf{9} & \bubblecircle{9} & \bubblecircle{9} & \bubblecircle{9} & \bubblecircle{9} & \bubblecircle{9} & \bubblecircle{9} & \bubblecircle{9} & \bubblecircle{9} \\[\studentnumberrowspace]
+\end{tabularx}
+}
+
+
+% Tabela: Tipo
+\newcommand{\tipo}{
+\begin{tabularx}{\textwidth}{rC}
+\multicolumn{2}{c}{\textbf{Tipo}} \\[\studentnumberrowspace]
+\textbf{1} & \bubblecircle{1} \\[\studentnumberrowspace]
+% \textbf{1} & \bubblecircle{x} \\[\studentnumberrowspace] % Tipo selecionado
+\textbf{2} & \bubblecircle{2} \\[\studentnumberrowspace]
+\textbf{3} & \bubblecircle{3} \\[\studentnumberrowspace]
+\textbf{4} & \bubblecircle{4} \\[\studentnumberrowspace]
+\textbf{5} & \bubblecircle{5} \\[\studentnumberrowspace]
+\end{tabularx}
+}
+
+
+% Tabela: 1-10 questões
+\expandafter\def\csname Q10\endcsname{
+\begin{tabularx}{\textwidth}{rCCCCCCC}
+  & \textbf{~A}      & \textbf{~B}      & \textbf{~C}      & \textbf{~D}      & \textbf{~E}      & \textbf{~V}      & \textbf{~F}       \\[\questionsrowspace]
+  \alternativelinenum{1}
+  \rcgray\alternativelinenum{2}
+  \alternativelinenum{3}
+  \rcgray\alternativelinenum{4}
+  \alternativelinenum{5}
+  \rcgray\alternativelinenum{6}
+  \alternativelinenum{7}
+  \rcgray\alternativelinenum{8}
+  \alternativelinenum{9}
+  \rcgray\alternativelinenum{10}
+  \alternativelinenull % 11
+  \alternativelinenull % 12
+  \alternativelinenull % 13
+  \alternativelinenull % 14
+  \alternativelinenull % 15
+  \alternativelinenull % 16
+  \alternativelinenull % 17
+  \alternativelinenull % 18
+  \alternativelinenull % 19
+  \alternativelinenull % 20
+\end{tabularx}
+}
+
+
+% Tabela: 1-20 questões
+\expandafter\def\csname Q20\endcsname{
+\begin{tabularx}{\textwidth}{rCCCCCCC}
+  & \textbf{~A}      & \textbf{~B}      & \textbf{~C}      & \textbf{~D}      & \textbf{~E}      & \textbf{~V}      & \textbf{~F}       \\[\questionsrowspace]
+  \alternativelinenum{1}
+  \rcgray\alternativelinenum{2}
+  \alternativelinenum{3}
+  \rcgray\alternativelinenum{4}
+  \alternativelinenum{5}
+  \rcgray\alternativelinenum{6}
+  \alternativelinenum{7}
+  \rcgray\alternativelinenum{8}
+  \alternativelinenum{9}
+  \rcgray\alternativelinenum{10}
+  \alternativelinenum{11}
+  \rcgray\alternativelinenum{12}
+  \alternativelinenum{13}
+  \rcgray\alternativelinenum{14}
+  \alternativelinenum{15}
+  \rcgray\alternativelinenum{16}
+  \alternativelinenum{17}
+  \rcgray\alternativelinenum{18}
+  \alternativelinenum{19}
+  \rcgray\alternativelinenum{20}
+\end{tabularx}
+}
+
+% Tabela: 21-25 questões
+\expandafter\def\csname Q25\endcsname{
+\begin{tabularx}{\textwidth}{rCCCCCCC}
+  & \textbf{~A}      & \textbf{~B}      & \textbf{~C}      & \textbf{~D}      & \textbf{~E}      & \textbf{~V}      & \textbf{~F}       \\[\questionsrowspace]
+  \alternativelinenum{21}
+  \rcgray\alternativelinenum{22}
+  \alternativelinenum{23}
+  \rcgray\alternativelinenum{24}
+  \alternativelinenum{25}
+  \alternativelinenull % 26
+  \alternativelinenull % 27
+  \alternativelinenull % 28
+  \alternativelinenull % 29
+  \alternativelinenull % 30
+  \alternativelinenull % 31
+  \alternativelinenull % 32
+  \alternativelinenull % 33
+  \alternativelinenull % 34
+  \alternativelinenull % 35
+  \alternativelinenull % 36
+  \alternativelinenull % 37
+  \alternativelinenull % 38
+  \alternativelinenull % 39
+  \alternativelinenull % 40
+\end{tabularx}\hfill%
+}
+
+
+% Tabela: 21-30 questões
+\expandafter\def\csname Q30\endcsname{
+\begin{tabularx}{\textwidth}{rCCCCCCC}
+  & \textbf{~A}      & \textbf{~B}      & \textbf{~C}      & \textbf{~D}      & \textbf{~E}      & \textbf{~V}      & \textbf{~F}       \\[\questionsrowspace]
+  \alternativelinenum{21}
+  \rcgray\alternativelinenum{22}
+  \alternativelinenum{23}
+  \rcgray\alternativelinenum{24}
+  \alternativelinenum{25}
+  \rcgray\alternativelinenum{26}
+  \alternativelinenum{27}
+  \rcgray\alternativelinenum{28}
+  \alternativelinenum{29}
+  \rcgray\alternativelinenum{30}
+  \alternativelinenull % 31
+  \alternativelinenull % 32
+  \alternativelinenull % 33
+  \alternativelinenull % 34
+  \alternativelinenull % 35
+  \alternativelinenull % 36
+  \alternativelinenull % 37
+  \alternativelinenull % 38
+  \alternativelinenull % 39
+  \alternativelinenull % 40
+\end{tabularx}\hfill%
+}
+
+
+% Tabela: 21-40 questões
+\expandafter\def\csname Q40\endcsname{
+\begin{tabularx}{\textwidth}{rCCCCCCC}
+  & \textbf{~A}      & \textbf{~B}      & \textbf{~C}      & \textbf{~D}      & \textbf{~E}      & \textbf{~V}      & \textbf{~F}       \\[\questionsrowspace]
+  \alternativelinenum{21}
+  \rcgray\alternativelinenum{22}
+  \alternativelinenum{23}
+  \rcgray\alternativelinenum{24}
+  \alternativelinenum{25}
+  \rcgray\alternativelinenum{26}
+  \alternativelinenum{27}
+  \rcgray\alternativelinenum{28}
+  \alternativelinenum{29}
+  \rcgray\alternativelinenum{30}
+  \alternativelinenum{31}
+  \rcgray\alternativelinenum{32}
+  \alternativelinenum{33}
+  \rcgray\alternativelinenum{34}
+  \alternativelinenum{35}
+  \rcgray\alternativelinenum{36}
+  \alternativelinenum{37}
+  \rcgray\alternativelinenum{38}
+  \alternativelinenum{39}
+  \rcgray\alternativelinenum{40}
+\end{tabularx}\hfill%
+}
+
+
+
+% Tabela: 41-50 questões
+\expandafter\def\csname Q50\endcsname{
+\begin{tabularx}{\textwidth}{rCCCCCCC}
+  & \textbf{~A}      & \textbf{~B}      & \textbf{~C}      & \textbf{~D}      & \textbf{~E}      & \textbf{~V}      & \textbf{~F}       \\[\questionsrowspace]
+  \alternativelinenum{41}
+  \rcgray\alternativelinenum{42}
+  \alternativelinenum{43}
+  \rcgray\alternativelinenum{44}
+  \alternativelinenum{45}
+  \rcgray\alternativelinenum{46}
+  \alternativelinenum{47}
+  \rcgray\alternativelinenum{48}
+  \alternativelinenum{49}
+  \rcgray\alternativelinenum{50}
+  \alternativelinenull % 51
+  \alternativelinenull % 52
+  \alternativelinenull % 53
+  \alternativelinenull % 54
+  \alternativelinenull % 55
+  \alternativelinenull % 56
+  \alternativelinenull % 57
+  \alternativelinenull % 58
+  \alternativelinenull % 59
+  \alternativelinenull % 60
+\end{tabularx}
+}
+
+
+% Tabela: 41-60 questões
+\expandafter\def\csname Q60\endcsname{
+\begin{tabularx}{\textwidth}{rCCCCCCC}
+  & \textbf{~A}      & \textbf{~B}      & \textbf{~C}      & \textbf{~D}      & \textbf{~E}      & \textbf{~V}      & \textbf{~F}       \\[\questionsrowspace]
+  \alternativelinenum{41}
+  \rcgray\alternativelinenum{42}
+  \alternativelinenum{43}
+  \rcgray\alternativelinenum{44}
+  \alternativelinenum{45}
+  \rcgray\alternativelinenum{46}
+  \alternativelinenum{47}
+  \rcgray\alternativelinenum{48}
+  \alternativelinenum{49}
+  \rcgray\alternativelinenum{50}
+  \alternativelinenum{51}
+  \rcgray\alternativelinenum{52}
+  \alternativelinenum{53}
+  \rcgray\alternativelinenum{54}
+  \alternativelinenum{55}
+  \rcgray\alternativelinenum{56}
+  \alternativelinenum{57}
+  \rcgray\alternativelinenum{58}
+  \alternativelinenum{59}
+  \rcgray\alternativelinenum{60}
+\end{tabularx}
+}
+
+
+
+
+
+
+% ============================================
+% DOCUMENTO
+% ============================================
+\begin{document}\fontsize{9.5pt}{9.5pt}\selectfont
+  \pagestyle{empty}
+
+  \headerP % header (preâmbulo)
+
+
+  % ============================================
+  % Identificação
+  % ============================================
+  \vfill
+  \markerboxcorner[0pt]{18pt}[1.25pt][5.5pt][5]\hfill\markerboxcorner[2pt]{18pt}[1.25pt][5.5pt][5]
+  \vfill\vfill
+
+  \begin{minipage}[t]{.45\columnwidth}
+  \vspace{0pt}
+  \textbf{Instruções}: 
+  \begin{enumerate}[resume=*questions,label={\arabic*.},leftmargin=*,parsep=0pt, partopsep=0pt]
+    \item Assine à caneta no espaço indicado.
+    \item Preencha a matrícula conforme modelo de marcação.
+    \item Assinale APENAS uma alternativa (de \textbf{A}-\textbf{E} ou \textbf{V}/\textbf{F}) para cada questão sem rasuras; não deixe nenhuma questão em branco.
+    \item Mais de uma marcação anulará a resposta da questão.
+    \item Não escreva nada no verso, deixe-o em branco.
+    \item Não amasse, não dobre, não rasure esta folha.
+    \item Preencha completamente o círculo à caneta esferográfica azul ou preta, conforme modelo de marcação CORRETO.
+  \end{enumerate} 
+  \begin{center}
+  \begin{tabular}{cc}
+  \fbox{%
+  \begin{minipage}{0.43\linewidth}\centering
+  \textbf{CORRETO}\\[10pt]
+  {\fontsize{14pt}{14pt}\selectfont\faCircle}
+  \end{minipage}
+  } &
+  \fbox{\centering%
+  \begin{minipage}{0.43\linewidth}\centering
+  \textbf{INCORRETO}\\[10pt]
+  {\fontsize{14pt}{14pt}\selectfont\faCircle[regular]}
+  \hspace{0.3cm}
+  {\fontsize{18pt}{18pt}\selectfont$\circledbullet$}
+  \hspace{0.3cm}
+  {\fontsize{14pt}{14pt}\selectfont\faCheckCircle[regular]}
+  \hspace{0.3cm}
+  {\fontsize{14pt}{14pt}\selectfont\faTimesCircle[regular]}
+  \end{minipage}
+  }
+  \end{tabular}
+  \end{center}
+  \end{minipage}\hfill%
+  %
+  \begin{minipage}[t]{.3\columnwidth}
+  \vspace{0pt}
+  \matricula
+  \end{minipage}\hfill%
+  %
+  \begin{minipage}[t]{.075\columnwidth}
+  \vspace{0pt}
+  \tipo
+  \end{minipage}\\ \vspace{40pt}
+
+
+
+  % ============================================
+  % Questões
+  % ============================================
+  \ifnum\numquestions=10
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q10\endcsname
+    \end{minipage}\hfill%
+    \phantom{
+      \begin{minipage}[t]{.3\columnwidth}
+        \vspace{0pt}
+        \csname Q40\endcsname
+      \end{minipage}\hfill%
+      \begin{minipage}[t]{.3\columnwidth}
+        \vspace{0pt}
+        \csname Q60\endcsname
+      \end{minipage}\hfill%
+    }
+  \fi
+
+  \ifnum\numquestions=20
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q20\endcsname
+    \end{minipage}\hfill%
+    \phantom{
+      \begin{minipage}[t]{.3\columnwidth}
+        \vspace{0pt}
+        \csname Q40\endcsname
+      \end{minipage}\hfill%
+      \begin{minipage}[t]{.3\columnwidth}
+        \vspace{0pt}
+        \csname Q60\endcsname
+      \end{minipage}\hfill%
+    }
+  \fi
+
+
+  \ifnum\numquestions=25
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q20\endcsname
+    \end{minipage}\hfill%
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q25\endcsname
+    \end{minipage}\hfill%
+    \phantom{
+      \begin{minipage}[t]{.3\columnwidth}
+        \vspace{0pt}
+        \csname Q60\endcsname
+      \end{minipage}\hfill%
+    }
+  \fi
+
+  \ifnum\numquestions=30
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q20\endcsname
+    \end{minipage}\hfill%
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q30\endcsname
+    \end{minipage}\hfill%
+    \phantom{
+      \begin{minipage}[t]{.3\columnwidth}
+        \vspace{0pt}
+        \csname Q60\endcsname
+      \end{minipage}\hfill%
+    }
+  \fi
+
+  \ifnum\numquestions=40
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q20\endcsname
+    \end{minipage}\hfill%
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q40\endcsname
+    \end{minipage}\hfill%
+    \phantom{
+      \begin{minipage}[t]{.3\columnwidth}
+        \vspace{0pt}
+        \csname Q60\endcsname
+      \end{minipage}\hfill%
+    }
+  \fi
+
+  \ifnum\numquestions=50
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q20\endcsname
+    \end{minipage}\hfill%
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q40\endcsname
+    \end{minipage}\hfill%
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q50\endcsname
+    \end{minipage}\hfill%
+  \fi
+
+  \ifnum\numquestions=60
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q20\endcsname
+    \end{minipage}\hfill%
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q40\endcsname
+    \end{minipage}\hfill%
+    \begin{minipage}[t]{.3\columnwidth}
+      \vspace{0pt}
+      \csname Q60\endcsname
+    \end{minipage}\hfill%
+  \fi
+  %
+  %
+  \vfill\vfill
+  \markerboxcorner[0pt]{18pt}[1.25pt][5.5pt][5]\hfill\markerboxcorner[2pt]{18pt}[1.25pt][5.5pt][5]
+  %
+  %
+  %
+\end{document}
+
