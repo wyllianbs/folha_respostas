@@ -1,10 +1,10 @@
 # Folha de Respostas - $\LaTeX$ Template
 
-Template $\LaTeX$ para geração de folhas de respostas de múltipla escolha para leitura óptica de marca (OMR).
+O código disponível em $\LaTeX$ gera de folhas de respostas de múltipla escolha para leitura óptica de marca (OMR).
 
 ## 📋 Descrição
 
-Este template permite a criação de folhas de respostas padronizadas para provas, com suporte a diferentes quantidades de questões e marcadores de alinhamento para leitura óptica automatizada.
+Este código permite a criação de folhas de respostas padronizadas para provas, com suporte a diferentes quantidades de questões e marcadores de alinhamento para leitura óptica automatizada.
 
 ## ✨ Características
 
