@@ -57,7 +57,9 @@
 \newcommand{\professor}             {Wyllian Bezerra da Silva} % nome do professor
 \newcommand{\assunto}               {FOLHA DE RESPOSTAS}
 
-\newcommand{\numquestions}          {60} % número de questões: 10, 20, 25, 30, 40, 50, 60
+\newcommand{\numquestions}          {50} % número de questões: 10, 20, 25, 30, 40, 50, 60
+
+\newcommand{\autentication}         {UFSC2025-2} 
 
 \newcommand{\studentnumberrowspace} {0pt}
 \newcommand{\questionsrowspace}     {0pt}
@@ -233,11 +235,11 @@
   \hspace{5pt}
   \begin{minipage}[c]{.755\textwidth}\setstretch{1.175}
   \vspace{2pt}
-  \LARGE{\bf{\uf}}\\
+  \LARGE{\bf{\uf}} \\
   \Large{\centro} \\
   \Large{\departamento}\\
   \large{\assunto} \\
-  \textnormal{Professor \professor} 
+  \textnormal{Professor \professor\hfill\hfill\fbox{$\textnormal{CA:}~\textcolor{blue}{\textbf{\texttt{\autentication}}}$}\hfill} 
 \end{minipage}
   \begin{minipage}[c]{.1\textwidth}
     \fcolorbox{black}{blue!5}{
@@ -505,8 +507,8 @@
   \vspace{0pt}
   \textbf{Instruções}: 
   \begin{enumerate}[resume=*questions,label={\arabic*.},leftmargin=*,parsep=0pt, partopsep=0pt]
-    \item Assine à caneta no espaço indicado.
-    \item Preencha a matrícula conforme modelo de marcação.
+    \item Assine à caneta e indique a turma nos espaços indicados.
+    \item Preencha a matrícula, tipo de prova e as alternativas conforme modelo de marcação.
     \item Assinale APENAS uma alternativa (de \textbf{A}-\textbf{E} ou \textbf{V}/\textbf{F}) para cada questão sem rasuras; não deixe nenhuma questão em branco.
     \item Mais de uma marcação anulará a resposta da questão.
     \item Não escreva nada no verso, deixe-o em branco.
@@ -517,13 +519,13 @@
   \begin{tabular}{cc}
   \fbox{%
   \begin{minipage}{0.43\linewidth}\centering
-  \textbf{CORRETO}\\[10pt]
+  \textbf{CORRETO}\\[5pt]
   {\fontsize{14pt}{14pt}\selectfont\faCircle}
   \end{minipage}
   } &
   \fbox{\centering%
   \begin{minipage}{0.43\linewidth}\centering
-  \textbf{INCORRETO}\\[10pt]
+  \textbf{INCORRETO}\\[5pt]
   {\fontsize{14pt}{14pt}\selectfont\faCircle[regular]}
   \hspace{0.3cm}
   {\fontsize{18pt}{18pt}\selectfont$\circledbullet$}
