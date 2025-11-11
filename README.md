@@ -1,6 +1,6 @@
 # Folha de Respostas - $\LaTeX$ Template
 
-O código disponível em $\LaTeX$ gera de folhas de respostas de múltipla escolha para leitura óptica de marca (OMR).
+O código disponível em $\LaTeX$ gera de folhas de respostas de múltipla escolha para reconhecimento óptico de marca (OMR).
 
 ## 📋 Descrição
 
